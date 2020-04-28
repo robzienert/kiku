@@ -1,9 +1,9 @@
 package com.robzienert.kiku.app
 
-import com.robzienert.kiku.core.Attire
 import com.robzienert.kiku.core.CoreContext
 import com.robzienert.kiku.shared.SharedPostProcessor
 import org.slf4j.LoggerFactory
+import org.springframework.boot.Banner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.builder.SpringApplicationBuilder
 import org.springframework.context.annotation.Bean
@@ -22,9 +22,12 @@ class KikuApplication {
   }
 }
 
+
 fun main(args: Array<String>) {
   SpringApplicationBuilder()
     .parent(CoreContext::class.java)
+    // Can uncomment to only have a single "Started KikuApplicationKt" log message: The one from the child.
+//      .logStartupInfo(false)
     .child(KikuApplication::class.java)
     .build()
     .run(*args)
