@@ -1,5 +1,6 @@
 package com.robzienert.kiku.app
 
+import com.robzienert.kiku.core.Attire
 import com.robzienert.kiku.core.CoreContext
 import com.robzienert.kiku.shared.SharedPostProcessor
 import org.slf4j.LoggerFactory

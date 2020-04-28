@@ -18,17 +18,16 @@ package com.robzienert.kiku.app
 import com.robzienert.kiku.core.Attire
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
-import javax.annotation.PostConstruct
 
 @Component
-class Bandana : Attire {
+class Dog(
+  attire: List<Attire>
+) {
   private val log by lazy { LoggerFactory.getLogger(javaClass) }
 
-  @PostConstruct
-  fun post() {
-    log.info("post-construct")
+  init {
+    attire.forEach {
+      log.info("${it.javaClass.simpleName}: ${it.color} (from ${it.source})")
+    }
   }
-
-  override val color: String = "floral"
-  override val source: String = "app"
 }

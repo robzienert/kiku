@@ -15,10 +15,15 @@
  */
 package com.robzienert.kiku.shared
 
+import com.robzienert.kiku.core.Attire
+import com.robzienert.kiku.core.Collar
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.config.BeanDefinition
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory
 import org.springframework.beans.factory.support.BeanDefinitionRegistry
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor
+import org.springframework.beans.factory.support.RootBeanDefinition
+
 
 class SharedPostProcessor(private val context: String) : BeanDefinitionRegistryPostProcessor {
   private val log by lazy { LoggerFactory.getLogger(javaClass) }
@@ -29,5 +34,12 @@ class SharedPostProcessor(private val context: String) : BeanDefinitionRegistryP
 
   override fun postProcessBeanDefinitionRegistry(registry: BeanDefinitionRegistry) {
     log.info("postProcessBeanDefinitionRegistry for $context")
+
+    if (context == "core") {
+      val beanDefinition = RootBeanDefinition(Collar::class.java)
+      beanDefinition.targetType = Attire::class.java
+      beanDefinition.role = BeanDefinition.ROLE_APPLICATION
+      registry.registerBeanDefinition("collar", beanDefinition)
+    }
   }
 }

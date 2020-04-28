@@ -13,22 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.robzienert.kiku.app
+package com.robzienert.kiku.core
 
-import com.robzienert.kiku.core.Attire
-import org.slf4j.LoggerFactory
-import org.springframework.stereotype.Component
-import javax.annotation.PostConstruct
-
-@Component
-class Bandana : Attire {
-  private val log by lazy { LoggerFactory.getLogger(javaClass) }
-
-  @PostConstruct
-  fun post() {
-    log.info("post-construct")
-  }
-
-  override val color: String = "floral"
-  override val source: String = "app"
+interface Attire {
+  val color: String
+  val source: String
 }
