@@ -20,14 +20,14 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory
 import org.springframework.beans.factory.support.BeanDefinitionRegistry
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor
 
-class PluginPostProcessor : BeanDefinitionRegistryPostProcessor {
+class SharedPostProcessor(private val context: String) : BeanDefinitionRegistryPostProcessor {
   private val log by lazy { LoggerFactory.getLogger(javaClass) }
 
   override fun postProcessBeanFactory(beanFactory: ConfigurableListableBeanFactory) {
-    log.info("postProcessBeanFactory")
+    log.info("postProcessBeanFactory for $context")
   }
 
   override fun postProcessBeanDefinitionRegistry(registry: BeanDefinitionRegistry) {
-    log.info("postProcessBeanDefinitionRegistry")
+    log.info("postProcessBeanDefinitionRegistry for $context")
   }
 }

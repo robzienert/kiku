@@ -15,7 +15,7 @@
  */
 package com.robzienert.kiku.core
 
-import com.robzienert.kiku.shared.PluginPostProcessor
+import com.robzienert.kiku.shared.SharedPostProcessor
 import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
@@ -32,6 +32,6 @@ class CoreContext {
 
   companion object {
     @Bean
-    fun postProcessor() = PluginPostProcessor()
+    fun postProcessor() = SharedPostProcessor("core")
   }
 }
