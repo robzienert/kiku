@@ -7,17 +7,17 @@ import org.springframework.boot.builder.SpringApplicationBuilder
 
 @SpringBootApplication
 class KikuApplication {
-	val log by lazy { LoggerFactory.getLogger(javaClass) }
+  val log by lazy { LoggerFactory.getLogger(javaClass) }
 
-	init {
-		log.info("kiku")
-	}
+  init {
+    log.info("kiku")
+  }
 }
 
 fun main(args: Array<String>) {
-	SpringApplicationBuilder()
-		.parent(CoreContext::class.java)
-		.child(KikuApplication::class.java)
-		.build()
-		.run(*args)
+  SpringApplicationBuilder()
+    .parent(CoreContext::class.java)
+    .child(KikuApplication::class.java)
+    .build()
+    .run(*args)
 }
