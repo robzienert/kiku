@@ -13,22 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.robzienert.kiku.app
+package com.robzienert.kiku.axon.query
 
-import com.robzienert.kiku.core.Attire
-import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
-import javax.annotation.PostConstruct
+import java.util.Optional
+import java.util.UUID
+
+interface FoodCartViewRepository {
+
+  fun save(entity: FoodCartView)
+
+  fun findById(id: UUID): Optional<FoodCartView>
+}
 
 @Component
-class Bandana : Attire {
-  private val log by lazy { LoggerFactory.getLogger(javaClass) }
+class MemoryFoodCartViewRepository : FoodCartViewRepository {
 
-  @PostConstruct
-  fun post() {
-    log.info("post-construct")
+  override fun save(entity: FoodCartView) {
+    store[entity.foodCartId] = entity
   }
 
-  override val color: String = "floral"
-  override val source: String = "app"
+  override fun findById(id: UUID): Optional<FoodCartView> =
+    Optional.ofNullable(store[id])
+
+  companion object {
+    private val store: MutableMap<UUID, FoodCartView> = mutableMapOf()
+  }
 }

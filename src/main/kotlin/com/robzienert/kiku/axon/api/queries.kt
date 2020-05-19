@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.robzienert.kiku.core
+package com.robzienert.kiku.axon.api
 
-interface Attire {
-  val color: String
-  val source: String
-}
+import java.util.UUID
+
+data class FindFoodCartQuery(val foodCartId: UUID)
+
+class RetrieveProductOptionsQuery

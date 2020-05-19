@@ -13,25 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.robzienert.kiku.core
+package com.robzienert.kiku.axon
 
-import com.robzienert.kiku.shared.SharedPostProcessor
-import org.slf4j.LoggerFactory
+import org.axonframework.eventsourcing.eventstore.EmbeddedEventStore
+import org.axonframework.eventsourcing.eventstore.EventStore
+import org.axonframework.eventsourcing.eventstore.inmemory.InMemoryEventStorageEngine
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-@ComponentScan
-class CoreContext {
-  val log by lazy { LoggerFactory.getLogger(javaClass) }
+@ComponentScan("com.robzienert.kiku.axon")
+class AxonConfig {
 
-  init {
-    log.info("core")
-  }
-
-  companion object {
-    @Bean
-    fun postProcessor() = SharedPostProcessor("core")
-  }
+  /**
+   * TODO(rz): JDBC
+   */
+  @Bean
+  fun embeddedEventStore(): EventStore =
+    EmbeddedEventStore.builder()
+      .storageEngine(InMemoryEventStorageEngine())
+      .build()
 }

@@ -13,9 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.robzienert.kiku.core
+package com.robzienert.kiku.axon.api
 
-class Collar : Attire {
-  override val color: String = "purple"
-  override val source: String = "core"
-}
+import java.util.UUID
+
+class FoodCartCreatedEvent(
+  val foodCartId: UUID
+)
+
+data class ProductSelectedEvent(
+  val foodCartId: UUID,
+  val productId: UUID,
+  val quantity: Int
+)
+
+data class ProductDeselectedEvent(
+  val foodCartId: UUID,
+  val productId: UUID,
+  val quantity: Int
+)
+
+data class OrderConfirmedEvent(
+  val foodCartId: UUID
+)

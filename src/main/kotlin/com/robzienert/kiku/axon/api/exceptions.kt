@@ -13,21 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.robzienert.kiku.app
+package com.robzienert.kiku.axon.api
 
-import com.robzienert.kiku.core.Attire
-import org.slf4j.LoggerFactory
-import org.springframework.stereotype.Component
+import java.lang.RuntimeException
 
-@Component
-class Dog(
-  attire: List<Attire>
-) {
-  private val log by lazy { LoggerFactory.getLogger(javaClass) }
-
-  init {
-    attire.forEach {
-      log.info("${it.javaClass.simpleName}: ${it.color} (from ${it.source})")
-    }
-  }
-}
+class ProductDeselectionException(message: String) : RuntimeException(message)

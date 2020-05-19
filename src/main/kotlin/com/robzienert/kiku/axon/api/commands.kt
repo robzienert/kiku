@@ -13,19 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.robzienert.kiku.core
+package com.robzienert.kiku.axon.api
 
-import org.slf4j.LoggerFactory
-import org.springframework.stereotype.Component
-import javax.annotation.PostConstruct
+import org.axonframework.commandhandling.RoutingKey
+import org.axonframework.modelling.command.TargetAggregateIdentifier
+import java.util.UUID
 
-@Component
-class CoreService {
+class CreateFoodCartCommand(
+  @RoutingKey val foodCartId: UUID
+)
 
-  private val log by lazy { LoggerFactory.getLogger(javaClass) }
+data class SelectProductCommand(
+  @TargetAggregateIdentifier val foodCartId: UUID,
+  val productId: UUID,
+  val quantity: Int
+)
 
-  @PostConstruct
-  fun hello() {
-    log.info("post-construct")
-  }
-}
+data class DeselectProductCommand(
+  @TargetAggregateIdentifier val foodCartId: UUID,
+  val proudctId: UUID,
+  val quantity: Int
+)
+
+data class ConfirmOrderCommand(
+  @TargetAggregateIdentifier val foodCartId: UUID
+)
